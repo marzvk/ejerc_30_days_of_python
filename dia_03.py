@@ -57,3 +57,59 @@ print(distance_euclidiana)
 
 # 10 compare las dos pendientes anteriores
 # las pendientes son iguales
+
+# 11 Calculate the value of y (y = x^2 + 6x + 9).
+#  Try to use different x values and figure out at what x value y is going to be 0
+
+x = int(input("ingrese valor de x: "))
+print(f' y = {x**2 + 6*x +9}')
+# - 3 en x da 0 de resultado en y
+
+# 12  Find the length of 'python' and 'dragon' and make a falsy comparison statement
+
+print(len("python"))
+print(len("dragon"))
+
+print(len("python") != len("dragon"))  # False
+
+# 13  Use and operator to check if 'on' is found in both 'python' and 'dragon'
+
+print('on' in 'python' and 'on' in 'dragon')
+
+# 14 I hope this course is not full of jargon. Use in operator to check if jargon
+# is in the sentence.
+print("jargon" in "I hope this course is not full of jargon")
+
+# 15 There is no 'on' in both dragon and python
+print('on' not in 'python' and 'on' in 'dragon')
+
+# 16 find the length of the text python and convert the value to float and convert it to string
+print(type(str(float(len("python")))))
+
+# 17 Even numbers are divisible by 2 and the remainder is zero.
+#     How do you check if a number is even or not using python?
+# num % num == 0 is ok
+
+# 18 Check if the floor division of 7 by 3 is equal to the int converted value of 2.7.
+print(7//3 == int(2.7))
+
+# 19 Check if type of '10' is equal to type of 10
+print(type('10') == type(10)) # False
+
+# 20 Check if int('9.8') is equal to 10
+print(int(9.8) == 10)
+
+# 21     Writ a script that prompts the user to enter hours and rate per hour.
+# Calculate pay of the person?
+
+horas = float(input("ingrese horas trabajadas: "))
+ingreso = float(input("ingrese ganancia por hora: "))
+print(f"Su ingreso semanal es: {ingreso*horas}")
+
+# 22 Write a script that prompts the user to enter number of years.
+# Calculate the number of seconds a person can live. Assume a person can live hundred years
+edad = int(input("ingrese los anios vividos: "))
+print(f'Usted ha vivido {edad*31536000} segundos')
+
+# 23 Write a Python script that displays the following table
+print("1\t1\t1\t1\t1\n2\t1\t2\t4\t8\n3\t1\t3\t9\t27\n4\t1\t4\t16\t64\n5\t1\t5\t25\t125")
