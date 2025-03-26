@@ -19,8 +19,9 @@ print(sw)
 print(scandic)
 print(es)
 
-# nivel 1 --- ejercicio 1
-#  Declare an empty list
+# NIVEL 1
+
+# 1 Declare an empty list
 list = []
 # 2 Declare a list with more than 5 items
 list = ['julio', 'agosto', 'mayo', 'enero', 'marzo', 'febrero']
@@ -102,3 +103,47 @@ print(full_stack)
 full_stack.insert(5, "Python")
 full_stack.insert(6, "SQL")
 print(full_stack)
+
+#  # # # Exercises: Level 2   # # # # #
+
+#   1 The following is a list of 10 students ages:
+
+ages = [19, 22, 19, 24, 20, 25, 26, 24, 25, 24]
+ages.sort()
+print(ages)
+ages.append(19)
+ages.append(26)
+ages.sort()
+print(ages)
+average = (sum(ages) / len(ages))  # average age
+range_ages = max(ages) - min(ages)
+print(range_ages)
+print(abs(min(ages) - average))
+print(abs(max(ages) - average))
+
+#Sort the list and find the min and max age
+#Add the min age and the max age again to the list
+#Find the median age (one middle item or two middle items divided by two) 24
+#Find the average age (sum of all items divided by their number )
+#Find the range of the ages (max minus min)
+#Compare the value of (min - average) and (max - average), use abs() method
+
+# 2 
+
+#Find the middle country(ies) in the countries list
+#Divide the countries list into two equal lists if it is even if not one
+#  more country for the first half.
+
+print(len(countries) / 2)
+print(countries[96:98])
+lista_1 = countries[0:98]
+lista_2 = countries[98::]
+
+otros_paises = [
+    'China', 'Russia', 'USA', 'Finland', 'Sweden', 'Norway', 'Denmark'
+]
+ch, rus, usa, *scandic = otros_paises
+print(ch)
+print(rus)
+print(scandic)
+# Unpack the first three countries and the rest as scandic countries.
