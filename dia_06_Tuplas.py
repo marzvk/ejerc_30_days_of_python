@@ -8,16 +8,18 @@
 # 4   How many siblings do you have?
 # 5   Modify the siblings tuple and add the name of your father and mother and
 #     assign it to family_members
-
+print()
 print("Exercises Level 1")
-names = tuple()
+names = tuple() # 1
 names = ("rigoberto", "ramon", "juan", "pedro")  # 2
+print('2- ', names)
 print(type(names))
 mas_nombres = tuple()
 mas_nombres = ("yo", "tu", "ellos")  # 3
+print('otra tupla: ', mas_nombres)
 tupla_3 = names + mas_nombres
 print(tupla_3)
-print('El len de la tupla es: ',len(tupla_3)) # 4
+print('4-  El len de la tupla es: ',len(tupla_3)) # 4
 padres = tuple()
 padres = ("george", "jane") # 5
 famyly_members = tupla_3 + padres
@@ -29,8 +31,9 @@ print(type(famyly_members))
 #    Exercises: Level 2
 
 # 1  Unpack siblings and parents from family_members
-
+print()
 print("Exercises Level 2")
+print()
 lista = list(famyly_members)
 padres_list = lista[7:]
 print("Los padres pasados en lista: ", padres_list)
@@ -58,9 +61,11 @@ print(type(food_stuff_tp))
 # 3 Change the about food_stuff_tp tuple to a food_stuff_lt list
 food_stuff_lt = list(food_stuff_tp)
 print(type(food_stuff_lt))
+
 # 4  Slice out the middle item or items from the food_stuff_tp tuple or food_stuff_lt list.
 out = food_stuff_lt[2:4]
 print("slice en la parte central de la lista: ", out)
+
 # 5  Slice out the first three items and the last three items from food_staff_lt list
 print("Primeros tres elementos de la lista:", food_stuff_lt[0:3])
 print("Ultimos tres elementos de la lista: ", food_stuff_lt[-3:])
