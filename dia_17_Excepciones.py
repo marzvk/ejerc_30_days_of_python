@@ -26,6 +26,7 @@ else:
     print('I usually run with the try block')
 finally:
     print('I alway run.')
+
 print('3-')
 try:
     name = input('Enter your name:')
@@ -33,7 +34,7 @@ try:
     age = 2024 - int(year_born)
     print(f'You are {name}. And your age is {age}.')
 except Exception as e:
-    print(e)
+    print('Exception: ', e)
 
 print('4- **kwargs')
 def packing_person_info(**kwargs):
@@ -81,4 +82,15 @@ for f, v in zip(fruits, vegetables):
 
 print(fruits_and_veges)
 
+print()
+# Exercise
 
+names = ['Finland', 'Sweden', 'Norway','Denmark','Iceland', 'Estonia','Russia']
+
+# Unpack the first five countries and store them in a variable nordic_countries, 
+# store Estonia and Russia in es, and ru respectively.
+
+*nordic_countries, es , ru = names
+print(nordic_countries)
+print(es)
+print(ru)
