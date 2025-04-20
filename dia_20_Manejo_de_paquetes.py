@@ -2,6 +2,7 @@ import requests
 import re
 import json
 import statistics
+from collections import Counter
 
 
 # 1 Read this url and find the 10 most frequent words. romeo_and_juliet = 'http://www.gutenberg.org/files/1112/1112.txt'
@@ -59,3 +60,45 @@ print('max: ', max(valor))
 print('mean: ', statistics.mean(valor))
 print('median: ', statistics.median(valor))
 print('stdev: ', statistics.stdev(valor))
+
+
+# ii the min, max, mean, median, standard deviation of cats' lifespan in years.
+
+print('ii')
+lifespan = []
+for dics in cats:
+    # for lifesp in dics['life_span']:
+    #     lifespan.append(lifesp)
+    lifespan.append(dics['life_span'].split())
+# print(lifespan)  ['14', '-', '15']
+numeros_life_span = []
+for lista in lifespan:
+    for number in lista:
+        if number.isnumeric():
+            number = int(number)
+            numeros_life_span.append(number)
+
+print('min: ', min(numeros_life_span),'.  max: ', max(numeros_life_span),
+    '.  mean: ',  statistics.mean(numeros_life_span))
+print('median life span: ', statistics.median(numeros_life_span))
+print('stdev life span: ', statistics.stdev(numeros_life_span))
+
+
+
+# iii  Create a frequency table of country and breed of cats
+
+print('iii')
+
+country = []
+breed = []
+
+for dics in cats:
+    country.append(dics['origin'])
+    breed.append(dics['name'])
+
+x = Counter(country)
+print(Counter(breed))
+
+for i in x.keys():
+    # print(i, ':', x[i])
+    print(i, ':', (x[i] * '@'))
