@@ -3,6 +3,7 @@ import re
 import json
 import statistics
 from collections import Counter
+from bs4 import BeautifulSoup
 
 
 # 1 Read this url and find the 10 most frequent words. romeo_and_juliet = 'http://www.gutenberg.org/files/1112/1112.txt'
@@ -102,3 +103,67 @@ print(Counter(breed))
 for i in x.keys():
     # print(i, ':', x[i])
     print(i, ':', (x[i] * '@'))
+
+
+print('3-')
+# 3 Read the countries API and find
+print('i - the 10 largest countries:')
+# i the 10 largest countries
+
+url_3 = "https://restcountries.com/v3.1/all"
+respuesta_pais = requests.get(url_3, timeout=8)
+pais = respuesta_pais.json()
+
+area = []
+for dic in pais:
+    area.append((dic['name']['common'], dic['area']))
+area.sort(key=lambda a: a[1], reverse=True)
+print(area[0:10])
+
+
+print('ii - the 10 most spoken languages:')
+# ii the 10 most spoken languages
+
+language_list = []
+for dic in pais:
+    try:
+        for lang in dic['languages'].values():
+            language_list.append(lang)
+    except:
+        pass
+    
+idiom_set = set(language_list)
+
+def most_spoken_languages(param):
+    
+    idiom_tuple = list()
+
+    for idiom in idiom_set:
+        idiom_tuple.append((idiom, language_list.count(idiom)))
+    order = []
+    for a in idiom_tuple:
+        order = sorted(idiom_tuple, key=lambda a: a[1], reverse=True)
+    return order[0:10]
+
+print(most_spoken_languages(language_list))
+
+# iii  the total number of languages in the countries API
+print(f'iii - The total numbers of languages is :{len(idiom_set)}')
+
+# 4  UCI is one of the most common places to get data sets for data science and machine learning. Read the 
+# content of UCL (https://archive.ics.uci.edu/ml/datasets.php). Without additional libraries it will be
+#  difficult, so you may try it with BeautifulSoup4
+
+print('4-')
+
+url_1 = 'https://oxylabs.io/blog/beautiful-soup-parsing-tutorial'
+respuestas = requests.get(url_1, timeout=8)
+content = respuestas.content  # contenido
+
+soup = BeautifulSoup(content,'html.parser') # elementos
+print(soup.title)
+print(soup.title.get_text())
+
+print('len h2: ', len(soup.h2.get_text()))
+print(soup.h2)
+print('li text: ', soup.li.text)
