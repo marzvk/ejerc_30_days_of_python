@@ -1,4 +1,4 @@
-#  clases
+# # # # # #       Clases     # # # # # # 
 
 import statistics
 
@@ -72,3 +72,54 @@ print('Standard Deviation: ', data.std())
 print('Variance: ', data.var())
 print('Frequency Distribution: ', data.freq_dist())
 
+
+print('2-')
+# 2  Create a class called PersonAccount. It has firstname, lastname, incomes,
+# expenses properties and it has total_income, total_expense, account_info, add_income,
+# add_expense and account_balance methods. Incomes is a set of incomes and its description.
+# The same goes for expenses.
+
+
+class PersonAcount:
+
+    def __init__(self, firsname, lastname, incomes, expenses):
+        self.firsname = firsname
+        self.lastname = lastname
+        self.ingresos = statistics.Counter(incomes)
+        self.expensas = statistics.Counter(expenses)
+
+    def total_income(self):
+        return self.ingresos.total()
+
+    def total_expense(self):
+        return self.expensas.total()
+
+    def acount_info(self):
+        # return self.__dict__
+        return f'{type(self).__name__}, {self.firsname}, {self.lastname}, {self.ingresos}, {self.expensas}'
+
+    def add_income(self, incomes):
+        return self.ingresos.update(incomes)
+
+    def add_expense(self, expenses):
+        return self.expensas.update(expenses)
+
+    def acount_balance(self):
+        return f'El balance total es:{self.total_income() - self.total_expense()}'
+
+
+juan = PersonAcount('juan', 'pedro', {
+    'sueldo': 99,
+    'alquileres': 550,
+    'compra': -40
+}, {
+    'compras': 70,
+    'rodados': 56
+})
+
+print('Total income: ', juan.total_income())
+print('Total expenses: ', juan.total_expense())
+print('Info: ', juan.acount_info())
+juan.add_income({'sueldo': 11})
+juan.add_expense({'rodados': 14})
+print(juan.acount_balance())
