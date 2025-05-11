@@ -1,14 +1,14 @@
+import json
 import requests
 from bs4 import BeautifulSoup
-import json
 
 print('Web scraping')
 print("Exercises")
 print("1-")
 
 
-url1 = "http://www.bu.edu/president/boston-university-facts-stats/"
-respuesta1 = requests.get(url1, timeout=8)
+URL1 = "http://www.bu.edu/president/boston-university-facts-stats/"
+respuesta1 = requests.get(URL1, timeout=8)
 # traemos el contenido de la pagina con get
 content = respuesta1.content
 datos = BeautifulSoup(content, 'html.parser')
@@ -51,3 +51,33 @@ JSON_DATA = json.dumps(listajs, indent=4)  # transformado a json
 
 print(JSON_DATA)
 
+
+#########################################################################
+print()
+print('2-')
+print()
+URL2 = 'https://archive.ics.uci.edu/dataset/109/wine'
+response2 = requests.get(URL2, timeout=8)
+content2 = response2.content
+datos2 = BeautifulSoup(content2, 'html.parser')
+tables2 = datos2.find('table', class_='table my-4 w-full')
+# print(tables2.prettify())
+
+# Obtener los títulos con list compreshion.
+# para cada th in tables2.findall hacer texto
+titulos = [th.get_text(strip=True) for th in tables2.find_all('th')]
+
+# Obtener las filas
+filas = []
+for tr in tables2.find_all('tr'):
+    celdas = [td.get_text(strip=True) for td in tr.find_all('td')]
+    if celdas:  # ignora filas vacías
+        filas.append(celdas)
+
+# Armar la lista de diccionarios
+lista_de_diccionarios = [
+    dict(zip(titulos, fila)) for fila in filas if len(fila) == len(titulos)
+]
+
+# Mostrar como JSON
+print(json.dumps(lista_de_diccionarios, indent=4))
