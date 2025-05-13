@@ -1,11 +1,11 @@
 import json
 import requests
 from bs4 import BeautifulSoup
+import re
 
 print('Web scraping')
 print("Exercises")
 print("1-")
-
 
 URL1 = "http://www.bu.edu/president/boston-university-facts-stats/"
 respuesta1 = requests.get(URL1, timeout=8)
@@ -48,9 +48,7 @@ for table in tables:
     listajs.append(dic)
 JSON_DATA = json.dumps(listajs, indent=4)  # transformado a json
 
-
 print(JSON_DATA)
-
 
 #########################################################################
 print()
@@ -81,3 +79,43 @@ lista_de_diccionarios = [
 
 # Mostrar como JSON
 print(json.dumps(lista_de_diccionarios, indent=4))
+
+#########################################################################
+print()
+print('3-')
+print()
+URL3 = 'https://en.wikipedia.org/wiki/List_of_presidents_of_the_United_States'
+response3 = requests.get(URL3, timeout=8)
+content3 = response3.content
+
+datos3 = BeautifulSoup(content3, 'html.parser')
+tables3 = datos3.find('table', class_='wikitable')
+
+# print(tables3.prettify())
+titulos3 = [th.get_text(strip=True) for th in tables3.find('tr')]
+
+
+def limpiar_lista(elem):
+    elemento = re.sub(r'[\u2010-\u2014\u2013]', '-', elem)
+    elemento = re.sub(r'\u00a0', '-', elemento)
+    elemento = re.sub(r'\[.*?\]', '', elemento).strip()
+    return elemento
+
+
+titulos3 = [limpiar_lista(e) for e in titulos3 if limpiar_lista(e)]
+# print(titulos)
+# titulos = [re.sub(r'\[.*?\]', '', item) for item in titulos]
+# titulos = [ elem.strip() for elem in titulos if elem.strip()]
+
+filas2 = []
+for tr in tables3.find_all('tr'):
+    celdas = [td.get_text(strip=True) for td in tr.find_all('td')]
+    if celdas:
+        filas2.append(celdas)
+td3 = []
+for sub_list in filas2:
+    td3.append([limpiar_lista(e) for e in sub_list if limpiar_lista(e)])
+
+print(json.dumps(titulos3, indent=4))
+# dic_list = [dict(zip(titulos3,fila)) for fila in td3 if len(fila) == len(titulos3) ]
+print(json.dumps(td3, indent=4))
