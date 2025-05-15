@@ -119,3 +119,60 @@ for sub_list in filas2:
 print(json.dumps(titulos3, indent=4))
 # dic_list = [dict(zip(titulos3,fila)) for fila in td3 if len(fila) == len(titulos3) ]
 print(json.dumps(td3, indent=4))
+
+
+######################################################################
+print()
+print('Otro ejemplo')
+print()
+
+
+URL = "https://realpython.github.io/fake-jobs/"
+page = requests.get(URL, timeout=8)
+
+soup = BeautifulSoup(
+    page.content,
+    "html.parser")  # .content no genera problemas de codificacion como .text
+# html parser asegura q se utilice un analizador apropiado para codigo html
+
+results = soup.find(id="ResultsContainer")
+# print(results.prettify())
+job_elements = results.find_all("div", class_="card-content")
+
+print(soup.name)
+
+for job_element in job_elements:
+    # print(job_element, end="\n"*3)
+    title_element = job_element.find("h2", class_="title")
+    company_element = job_element.find("h3", class_="company")
+    location_element = job_element.find("p", class_="location")
+    print(title_element.text.strip())
+    print(company_element.text.strip()
+          )  # strip() elimina espacio en blanco entre los textos
+    print(location_element.text.strip())
+    print()  # imprime linea vacia para separar
+
+python_jobs = results.find_all("h2",
+                               string=lambda text: "python" in text.lower())
+
+python_job_elements = [
+    h2_element.parent.parent.parent for h2_element in python_jobs
+]  # para cada elemento en python_jobs buscamos el padre abuelo bisabuelo, para cada h2 element
+# in python jobs, para conseguir todo el <div> que contiene el trabajo con palabra: python
+
+for job_element in python_job_elements:
+    link_url = job_element.find_all("a")[1]["href"]
+    print(f"Apply here: {link_url}\n\n")
+
+
+
+# metodos de eliminacion :
+
+html_tag = "<p>premium content</p>"
+html_tag.removeprefix("<p>").removesuffix("</p>")
+# 'premium content' . con strip eliminaria partes no deseadas
+
+html_tag.strip("\u200b")
+filename = "   Report_2025 FINAL.pdf  "
+filename.strip().lower().replace(" ", "_") # 'report_2025_final.pdf'
+
