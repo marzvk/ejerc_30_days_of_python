@@ -241,3 +241,47 @@ with open("data_files/hacker_news.csv") as f:
             counter += 1
     print(counter)
 
+
+#########################################################
+# ejemplo extra
+"Descarga de archivos"
+
+from concurrent.futures import ThreadPoolExecutor
+import requests
+
+# DESCARGA MULTIPROCESO - MULTIHILO
+
+TEMPLATE_URL = ("https://api.worldbank.org/v2/en/indicator/"
+                "{resource}?downloadformat=csv")
+
+
+def download_file(url_dada):
+    "descarga"
+    response = requests.get(url_dada, timeout=8)
+    if "content-disposition" in response.headers:
+        content_disposition = response.headers["content-disposition"]
+        filename = content_disposition.split("filename=")[1]
+    else:
+        filename = url_dada.split("/")[-1]
+    with open(filename, mode="wb") as file:
+        file.write(response.content)
+    print(f"Downloaded file {filename}")
+
+
+urls = [
+    # Total population by country
+    TEMPLATE_URL.format(resource="SP.POP.TOTL"),
+
+    # GDP by country
+    TEMPLATE_URL.format(resource="NY.GDP.MKTP.CD"),
+
+    # Population density by country
+    TEMPLATE_URL.format(resource="EN.POP.DNST"),
+]
+
+with ThreadPoolExecutor() as executor:
+    executor.map(download_file, urls)
+
+for url in urls:
+    download_file(url)
+
